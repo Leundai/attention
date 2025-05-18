@@ -15,17 +15,23 @@ To use the code in the package, you need to follow those steps:
     - If you want dynamic variables go to `lib/index.ts` and edit `dynamicEnvValues` object.
 
 2. Use it, for example:
+
     ```ts
     console.log(process.env['CEB_EXAMPLE']);
     ```
+
    or
+
    ```ts
    console.log(process.env.CEB_EXAMPLE);
    ```
+
    but with first solution, autofill should work for IDE:
    ![img.png](img.png)
 3. You are also able to import const like `IS_DEV` from `@extension/env` like:
+
    ```ts
     import { IS_DEV } from '@extension/env';
     ```
+
    For more look [ENV CONST](lib/const.ts)

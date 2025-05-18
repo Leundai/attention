@@ -125,8 +125,8 @@ pnpm add tailwindcss-animate class-variance-authority tailwind-merge lucide-reac
 
 3. Edit `withUI.ts` in `lib` folder
 
-This configuration file is from the manual guide. You can refer to the manual guide to modify the configuration file. ([
-`Configure tailwind.config.js`](https://ui.shadcn.com/docs/installation/manual))
+This configuration file is from the manual guide. You can refer to the manual guide to modify the configuration file.
+([`Configure tailwind.config.js`](https://ui.shadcn.com/docs/installation/manual))
 
 ```ts
 import deepmerge from 'deepmerge';

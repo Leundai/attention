@@ -12,16 +12,10 @@ what you consume — not to make value judgments, but to enable informed reflect
 ![typescript](https://img.shields.io/badge/Typescript-3178C6?style=flat-square&logo=typescript&logoColor=white)
 ![vite](https://badges.aleen42.com/src/vitejs.svg)
 
-![GitHub action badge](https://github.com/Jonghakseo/chrome-extension-boilerplate-react-vite/actions/workflows/build-zip.yml/badge.svg)
-![GitHub action badge](https://github.com/Jonghakseo/chrome-extension-boilerplate-react-vite/actions/workflows/lint.yml/badge.svg)
+![GitHub action badge](https://github.com/leundai/prism/actions/workflows/build-zip.yml/badge.svg)
+![GitHub action badge](https://github.com/leundai/prism/actions/workflows/lint.yml/badge.svg)
 
 </div>
- project is listed in the [Awesome Vite](https://github.com/vitejs/awesome-vite)
-
-> [!TIP]
-> Share storage state between all pages
->
-> <https://github.com/user-attachments/assets/3b8e189f-6443-490e-a455-4f9570267f8c>
 
 ## Table of Contents
 
@@ -38,7 +32,6 @@ what you consume — not to make value judgments, but to enable informed reflect
   - [For root](#install-dependency-for-root)
   - [For module](#install-dependency-for-module)
 - [Environment variables](#environment-variables)
-- [Community](#community)
 - [Reference](#reference)
 
 ## Intro
@@ -68,14 +61,11 @@ the build speed and development experience by using Vite and Turborepo.
 
    **This will set the EOL (End of line) character to be the same as on Linux/macOS. Without this, our bash script won't
    work, and you will have conflicts with developers on Linux/macOS.**
-2. Clone this repository.( ```git clone https://github.com/Jonghakseo/chrome-extension-boilerplate-react-vite``` )
+2. Clone this repository.( ```git clone https://github.com/leundai/prism``` )
 3. Ensure your node version is >= than in `.nvmrc` file, recommend to
    use [nvm](https://github.com/nvm-sh/nvm?tab=readme-ov-file#intro)
-4. Edit `/packages/i18n/locales/`{your locale(s)}/`messages.json`
-5. In the objects `extensionDescription` and `extensionName`, change the `message` fields (leave `description` alone)
-6. In `/.package.json`, change the `version` to the desired version of your extension.
-7. Install pnpm globally: `npm install -g pnpm` (ensure your node version >= 22.12.0)
-8. Run `pnpm install`
+4. Install pnpm globally: `npm install -g pnpm` (ensure your node version >= 22.12.0)
+5. Run `pnpm install`
 
 Then, depending on the target browser:
 
@@ -140,12 +130,6 @@ The extension lives in the `chrome-extension` directory and includes the followi
   (`background.service_worker` in manifest.json)
 - [`public`](chrome-extension/public/) - icons referenced in the manifest; content CSS for user's page injection
 
-> [!IMPORTANT]
-> To facilitate development, the boilerplate is configured to "Read and change all your data on all websites".
-> In production, it's best practice to limit the premissions to only the strictly necessary websites. See
-> [Declaring permissions](https://developer.chrome.com/docs/extensions/develop/concepts/declare-permissions)
-> and edit `manifest.js` accordingly.
-
 ### Pages <a name="structure-pages"></a>
 
 Code that is transpiled to be part of the extension lives in the [pages](pages/) directory.
@@ -205,16 +189,6 @@ If saving source files doesn't cause the extension HMR code to trigger a reload 
    [kill the
    `turbo` process](https://github.com/Jonghakseo/chrome-extension-boilerplate-react-vite/issues/612#issuecomment-2518982339)
    and run `pnpm dev` again.
-
-## Community
-
-To chat with other community members, you can join the [Discord](https://discord.gg/4ERQ6jgV9a) server.
-You can ask questions on that server, and you can also help others.
-
-Also, suggest new features or share any challenges you've faced while developing Chrome extensions!
-
-If you're debugging one, you can use [Brie](https://go.briehq.com/github?utm_source=CEB)
-lets you capture screenshots, errors, and network activity, making it easier for us to help.
 
 ## Reference
 
