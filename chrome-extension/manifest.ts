@@ -29,7 +29,7 @@ const manifest = {
   },
   version: packageJson.version,
   description: '__MSG_extensionDescription__',
-  host_permissions: ['https://x.com/*'],
+  host_permissions: ['*://x.com/*'],
   permissions: ['storage', 'scripting', 'tabs', 'sidePanel'],
   options_page: 'options/index.html',
   background: {
@@ -45,17 +45,18 @@ const manifest = {
   },
   content_scripts: [
     {
-      matches: ['https://x.com/*'],
+      matches: ['*://x.com/*'],
       js: ['content/index.iife.js'],
+      run_at: 'document_start',
     },
     {
-      matches: ['https://x.com/*'],
+      matches: ['*://x.com/*'],
       css: ['content.css'],
     },
   ],
   web_accessible_resources: [
     {
-      resources: ['*.js', '*.css', '*.svg', 'icon-128.png', 'icon-34.png'],
+      resources: ['*.js', '*.css', '*.svg', 'icon-128.png', 'icon-34.png', 'injected.js'],
       matches: ['*://*/*'],
     },
   ],
