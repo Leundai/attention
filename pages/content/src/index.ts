@@ -1,17 +1,14 @@
-type Tweet = {
-  id: string;
-  mainText: string;
-  retweetText?: string;
-  timestamp: number;
-};
+// type Tweet = {
+//   id: string;
+//   mainText: string;
+//   retweetText?: string;
+//   timestamp: number;
+// };
 
 // Inject external script file instead of inline script
 function injectScript() {
   const script = document.createElement('script');
   script.src = chrome.runtime.getURL('injected.js');
-  script.onload = function () {
-    this.remove();
-  };
   (document.head || document.documentElement).appendChild(script);
 }
 
@@ -23,12 +20,10 @@ window.addEventListener('message', function (event) {
     console.log('Intercepted API response:', event.data);
 
     // Send to background script
-    chrome.runtime
-      .sendMessage({
-        type: 'API_RESPONSE',
-        data: event.data,
-      })
-      .catch(() => {}); // Ignore if background script isn't listening
+    chrome.runtime.sendMessage({
+      type: 'API_RESPONSE',
+      data: event.data,
+    });
   }
 });
 

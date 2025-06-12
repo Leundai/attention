@@ -1,3 +1,12 @@
+export {};
+
+declare global {
+  interface XMLHttpRequest {
+    _interceptedUrl?: string | URL;
+    _interceptedMethod?: string;
+  }
+}
+
 (function () {
   'use strict';
 
@@ -7,15 +16,22 @@
   const originalXHRSend = XMLHttpRequest.prototype.send;
 
   // Helper function to check if URL should be intercepted
-  function shouldIntercept(url) {
-    return url && url.includes('x.com') && (url.includes('HomeTimeline') || url.includes('TweetDetail'));
+  function shouldIntercept(url?: string | URL): boolean {
+    if (url === undefined) {
+      return false;
+    }
+
+    if (url instanceof URL) {
+      url = url.toString();
+    }
+
+    return url.includes('x.com') && (url.includes('HomeTimeline') || url.includes('TweetDetail'));
   }
 
   // Override fetch
   window.fetch = async function (...args) {
     const response = await originalFetch.apply(this, args);
-
-    const url = typeof args[0] === 'string' ? args[0] : args[0]?.url;
+    const url = args[0].toString();
 
     if (shouldIntercept(url)) {
       try {
@@ -42,28 +58,32 @@
   };
 
   // Override XMLHttpRequest
-  XMLHttpRequest.prototype.open = function (method, url, ...rest) {
+  XMLHttpRequest.prototype.open = function (
+    method: string,
+    url: string | URL,
+    async: boolean = true,
+    username?: string | null,
+    password?: string | null,
+  ) {
     this._interceptedUrl = url;
     this._interceptedMethod = method;
-    return originalXHROpen.apply(this, [method, url, ...rest]);
+    return originalXHROpen.apply(this, [method, url, async, username, password]);
   };
 
   XMLHttpRequest.prototype.send = function (...args) {
-    const xhr = this;
+    if (shouldIntercept(this._interceptedUrl)) {
+      const originalOnReadyStateChange = this.onreadystatechange;
 
-    if (shouldIntercept(xhr._interceptedUrl)) {
-      const originalOnReadyStateChange = xhr.onreadystatechange;
-
-      xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4 && xhr.status >= 200 && xhr.status < 300) {
+      this.onreadystatechange = function (ev) {
+        if (this.readyState === 4 && this.status >= 200 && this.status < 300) {
           try {
             window.postMessage(
               {
                 type: 'API_RESPONSE_INTERCEPTED',
-                method: 'xhr',
-                url: xhr._interceptedUrl,
-                response: xhr.responseText,
-                status: xhr.status,
+                method: 'this',
+                url: this._interceptedUrl,
+                response: this.responseText,
+                status: this.status,
                 timestamp: Date.now(),
               },
               '*',
@@ -74,7 +94,7 @@
         }
 
         if (originalOnReadyStateChange) {
-          originalOnReadyStateChange.apply(this, arguments);
+          originalOnReadyStateChange.apply(this, [ev]);
         }
       };
     }
