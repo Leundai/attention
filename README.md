@@ -34,11 +34,6 @@ what you consume — not to make value judgments, but to enable informed reflect
 - [Environment variables](#environment-variables)
 - [Reference](#reference)
 
-## Intro
-
-This boilerplate helps you create Chrome/Firefox extensions using React and Typescript. It improves
-the build speed and development experience by using Vite and Turborepo.
-
 ## Features
 
 - [React19](https://reactjs.org/)
@@ -49,7 +44,6 @@ the build speed and development experience by using Vite and Turborepo.
 - [Prettier](https://prettier.io/)
 - [ESLint](https://eslint.org/)
 - [Chrome Extensions Manifest Version 3](https://developer.chrome.com/docs/extensions/mv3/intro/)
-- [Custom i18n package](/packages/i18n/)
 - [Custom HMR (Hot Module Rebuild) plugin](/packages/hmr/)
 - [End-to-end testing with WebdriverIO](https://webdriver.io/)
 
@@ -134,19 +128,10 @@ The extension lives in the `chrome-extension` directory and includes the followi
 
 Code that is transpiled to be part of the extension lives in the [pages](pages/) directory.
 
+#### Enabled
+
 - [`content`](pages/content/) - [content scripts](https://developer.chrome.com/docs/extensions/develop/concepts/content-scripts)
   (`content_scripts` in manifest.json)
-- [`content-ui`](pages/content-ui) - React UI rendered in the current page (you can see it at the very bottom when you
-  get started)
-  (`content_scripts` in manifest.json)
-- [`content-runtime`](pages/content-runtime/src/) - [injected content scripts](https://developer.chrome.com/docs/extensions/develop/concepts/content-scripts#functionality);
-  this can be injected from `popup` like standard `content`
-- [`devtools`](pages/devtools/) - [extend the browser DevTools](https://developer.chrome.com/docs/extensions/how-to/devtools/extend-devtools#creating)
-  (`devtools_page` in manifest.json)
-- [`devtools-panel`](pages/devtools-panel/) - [DevTools panel](https://developer.chrome.com/docs/extensions/reference/api/devtools/panels)
-  for [devtools](pages/devtools/src/index.ts)
-- [`new-tab`](pages/new-tab/) - [override the default New Tab page](https://developer.chrome.com/docs/extensions/develop/ui/override-chrome-pages)
-  (`chrome_url_overrides.newtab` in manifest.json)
 - [`options`](pages/options/) - [options page](https://developer.chrome.com/docs/extensions/develop/ui/options-page)
   (`options_page` in manifest.json)
 - [`popup`](pages/popup/) - [popup](https://developer.chrome.com/docs/extensions/reference/api/action#popup) shown when
@@ -155,6 +140,19 @@ Code that is transpiled to be part of the extension lives in the [pages](pages/)
 - [`side-panel`](pages/side-panel/) - [sidepanel (Chrome 114+)](https://developer.chrome.com/docs/extensions/reference/api/sidePanel)
   (`side_panel.default_path` in manifest.json)
 
+#### Disabled
+
+- [`content-ui`](pages/content-ui) - React UI rendered in the current page
+ (you can see it at the very bottom when you get started) (`content_scripts` in manifest.json)
+- [`content-runtime`](pages/content-runtime/src/) - [injected content scripts](https://developer.chrome.com/docs/extensions/develop/concepts/content-scripts#functionality);
+  this can be injected from `popup` like standard `content`
+- [`devtools`](pages/devtools/) - [extend the browser DevTools](https://developer.chrome.com/docs/extensions/how-to/devtools/extend-devtools#creating)
+  (`devtools_page` in manifest.json)
+- [`devtools-panel`](pages/devtools-panel/) - [DevTools panel](https://developer.chrome.com/docs/extensions/reference/api/devtools/panels)
+  for [devtools](pages/devtools/src/index.ts)
+- [`new-tab`](pages/new-tab/) - [override the default New Tab page](https://developer.chrome.com/docs/extensions/develop/ui/override-chrome-pages)
+  (`chrome_url_overrides.newtab` in manifest.json)
+
 ### Packages <a name="structure-packages"></a>
 
 Some shared packages:
@@ -162,7 +160,6 @@ Some shared packages:
 - `dev-utils` - utilities for Chrome extension development (manifest-parser, logger)
 - `env` - exports object which contain all environment variables from `.env` and dynamically declared
 - `hmr` - custom HMR plugin for Vite, injection script for reload/refresh, HMR dev-server
-- `i18n` - custom internationalization package; provides i18n function with type safety and other validation
 - `shared` - shared code for the entire project (types, constants, custom hooks, components etc.)
 - `storage` - helpers for easier integration with [storage](https://developer.chrome.com/docs/extensions/reference/api/storage),
 e.g. local/session storages
