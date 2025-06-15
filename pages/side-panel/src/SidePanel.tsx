@@ -2,7 +2,6 @@ import '@src/SidePanel.css';
 import { useStorage, withErrorBoundary, withSuspense } from '@extension/shared';
 import { exampleThemeStorage } from '@extension/storage';
 import { ToggleButton } from '@extension/ui';
-import { t } from '@extension/i18n';
 
 const SidePanel = () => {
   const theme = useStorage(exampleThemeStorage);
@@ -20,7 +19,7 @@ const SidePanel = () => {
         <p>
           Edit <code>pages/side-panel/src/SidePanel.tsx</code>
         </p>
-        <ToggleButton onClick={exampleThemeStorage.toggle}>{t('toggleTheme')}</ToggleButton>
+        <ToggleButton onClick={exampleThemeStorage.toggle}>Toggle Theme</ToggleButton>
       </header>
     </div>
   );
