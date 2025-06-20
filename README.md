@@ -113,7 +113,7 @@ Read: [Module Manager](packages/module-manager/README.md)
 
 Read: [Env Documentation](packages/env/README.md)
 
-## Boilerplate structure <a name="structure"></a>
+## Project Structure <a name="structure"></a>
 
 ### Chrome extension <a name="structure-chrome-extension"></a>
 

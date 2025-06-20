@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pnpm run prettier)",
+      "Bash(pnpm run e2e)",
+      "Bash(pnpm run dev)",
+      "Bash(pnpm run lint*)",
+      "Read(~/dotfiles)",
+      "Task",
+      "Bash(git log:*)",
+      "Glob",
+      "Grep",
+      "LS",
+      "Read",
+      "Edit",
+      "MultiEdit",
+      "Write",
+      "WebFetch",
+      "WebSearch",
+      "Agent"
+    ],
+    "deny": ["Bash(curl:*)"]
+  }
+}
