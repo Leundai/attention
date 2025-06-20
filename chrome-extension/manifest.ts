@@ -19,8 +19,7 @@ const packageJson = JSON.parse(readFileSync('./package.json', 'utf8'));
  */
 const manifest = {
   manifest_version: 3,
-  default_locale: 'en',
-  name: '__MSG_extensionName__',
+  name: 'Prism',
   browser_specific_settings: {
     gecko: {
       id: 'example@example.com',
@@ -28,7 +27,7 @@ const manifest = {
     },
   },
   version: packageJson.version,
-  description: '__MSG_extensionDescription__',
+  description: 'Introspective Social Media',
   host_permissions: ['*://x.com/*'],
   permissions: ['storage', 'scripting', 'tabs', 'sidePanel'],
   options_page: 'options/index.html',
