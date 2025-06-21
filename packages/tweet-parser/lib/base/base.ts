@@ -1,3 +1,5 @@
+import type { Tweet } from './types.js';
+
 const extractMedia = (legacy: any) => {
   const media = [];
   const mediaEntities = legacy.extended_entities?.media || legacy.entities?.media || [];
@@ -52,8 +54,7 @@ const isReply = (legacy: any) => {
 const isThread = (legacy: any) => {
   return legacy.display_text_range && legacy.display_text_range[0] > 0;
 };
-
-const parseTweet = (raw_tweet: any) => {
+const parseTweet = (raw_tweet: any): Tweet | null => {
   let tweet: any = raw_tweet;
   if ('tweet' in raw_tweet) {
     tweet = raw_tweet.tweet as any;
@@ -67,7 +68,7 @@ const parseTweet = (raw_tweet: any) => {
     const userCore = userResult.core || {};
 
     // Extract basic tweet info
-    const tweetInfo = {
+    const tweetInfo: Tweet = {
       // Tweet identifiers
       id: tweet.rest_id,
       conversation_id: legacy.conversation_id_str,
@@ -137,7 +138,7 @@ const parseTweet = (raw_tweet: any) => {
 
     // Parse quoted tweet if present
     if (tweet.quoted_status_result?.result) {
-      tweetInfo.quoted_tweet = parseTweet(tweet.quoted_status_result?.result) as any;
+      tweetInfo.quoted_tweet = parseTweet(tweet.quoted_status_result?.result);
     }
 
     return tweetInfo;
@@ -148,7 +149,7 @@ const parseTweet = (raw_tweet: any) => {
 };
 
 export const tweetParser = {
-  parseResponse: (response: any) => {
+  parseResponse: (response: any): Tweet[] => {
     const tweets = [];
 
     try {
