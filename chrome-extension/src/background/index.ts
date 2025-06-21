@@ -1,6 +1,6 @@
 import 'webextension-polyfill';
 import { exampleThemeStorage } from '@extension/storage';
-import { tweetParser } from '@extension/tweet-parser';
+import { tweetParser } from '../tweet-parser';
 
 exampleThemeStorage.get().then(theme => {
   console.log('theme', theme);
