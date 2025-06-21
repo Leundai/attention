@@ -55,6 +55,7 @@ export default ts.config(
       'import-x/no-named-as-default-member': 'off',
       '@typescript-eslint/consistent-type-imports': 'error',
       'react/prop-types': 'off',
+      '@typescript-eslint/no-explicit-any': 'warn', // TODO: Remove this once we have tweet-parser fully typed
     },
     linterOptions: {
       reportUnusedDisableDirectives: 'error',
