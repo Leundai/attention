@@ -16,11 +16,5 @@ chrome.runtime.onMessage.addListener((message, sender) => {
   console.log('Parsing tweets');
   const parsedTweets = tweetParser.parseResponse(JSON.parse(message.data.response));
   console.log(parsedTweets);
-  // if (message.type === 'GREETING') {
-  //   // Optionally respond
-  //   sendResponse({ reply: 'Hi from background!' });
-  // }
-
-  // Returning true tells Chrome you'll send a response asynchronously
   return true;
 });

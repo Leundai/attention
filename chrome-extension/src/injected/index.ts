@@ -25,7 +25,12 @@ declare global {
       url = url.toString();
     }
 
-    return url.includes('x.com') && (url.includes('HomeTimeline') || url.includes('TweetDetail'));
+    try {
+      const urlObj = new URL(url);
+      return urlObj.hostname === 'x.com' && (url.includes('HomeTimeline') || url.includes('TweetDetail'));
+    } catch {
+      return false;
+    }
   }
 
   // Override fetch
